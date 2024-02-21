@@ -1,0 +1,12 @@
+[Invulnerability]
+{
+offset = 0x35BD;
+off = e89efeffffb80100;
+on = 9090909090b80100;
+}
+[instant win]#not working
+{
+offset = 0x32B9;
+off = 003C517519488B45;
+on = 013C517519488B45;
+}
