@@ -86,22 +86,25 @@ static void	zone_check(t_core *core)
 
 void	p_move(t_core *core, int *val, int spm, int dir)
 {
-	get_client(core)->old_origin = get_client(core)->origin;
-	*val += spm;
-	if (dir != get_client(core)->dir)
+	if (get_status(core) != status_main)
 	{
-		if (dir == kb_up)
-			change_pview(core, 'b');
-		if (dir == kb_down)
-			change_pview(core, 'f');
-		if (dir == kb_left)
-			change_pview(core, 'l');
-		if (dir == kb_right)
-			change_pview(core, 'r');
-		get_client(core)->dir = dir;
+		get_client(core)->old_origin = get_client(core)->origin;
+		*val += spm;
+		if (dir != get_client(core)->dir)
+		{
+			if (dir == kb_up)
+				change_pview(core, 'b');
+			if (dir == kb_down)
+				change_pview(core, 'f');
+			if (dir == kb_left)
+				change_pview(core, 'l');
+			if (dir == kb_right)
+				change_pview(core, 'r');
+			get_client(core)->dir = dir;
+		}
+		browse_map(core, p_can_move);
+		zone_check(core);
+		if (t_vec2cmp(get_client(core)->origin, get_client(core)->old_origin))
+			add_steps(core);
 	}
-	browse_map(core, p_can_move);
-	zone_check(core);
-	if (t_vec2cmp(get_client(core)->origin, get_client(core)->old_origin))
-		add_steps(core);
 }

@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 20:30:19 by lchiva            #+#    #+#             */
-/*   Updated: 2024/02/20 08:39:33 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/02/28 03:23:32 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	init_map(t_core *core, char *file)
 			{
 				stock(core, stack);
 				free(stack);
+				close(fd.x);
 				return (map_is_valid(core));
 			}
 			else

@@ -42,7 +42,7 @@ typedef struct vec4_s
 
 //basics
 int			sl_sqrt(int nb);
-int 		randintrange(int min, int max);
+int			randintrange(int min, int max);
 void		set_value(void *adr, __uint32_t val);
 __uint32_t	get_value(void *adr);
 clock_t		get_fps(clock_t cpu);

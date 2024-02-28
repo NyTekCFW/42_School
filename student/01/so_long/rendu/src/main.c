@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:02:15 by lchiva            #+#    #+#             */
-/*   Updated: 2024/02/20 07:49:53 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/02/28 03:24:28 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ int	main(int argc, char **argv)
 		check_files();
 		win_maker(&core);
 	}
+	else
+		win_error(&core);
 	return (1);
 }

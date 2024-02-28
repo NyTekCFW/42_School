@@ -14,6 +14,8 @@
 
 int	hook_key_release(int ks, t_core *core)
 {
+	if (get_game(core)->stop_proc)
+		return (0);
 	if ((ks == get_client(core)->keybind[kb_up])
 		|| (ks == XK_Up))
 		core->ks.up = 0;

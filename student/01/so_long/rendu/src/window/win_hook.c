@@ -31,6 +31,8 @@ static void	pause_status(int ks, t_core *core)
 
 static int	hook_keyboard(int ks, t_core *core)
 {
+	if (get_game(core)->stop_proc)
+		return (0);
 	pause_status(ks, core);
 	if (get_status(core) == status_playing)
 		get_hook(core)->binds = binds_resume;
@@ -49,6 +51,8 @@ static int	hook_mouse(int ks, int x, int y, t_core *core)
 {
 	t_uibutton	btn;
 
+	if (get_game(core)->stop_proc)
+		return (0);
 	if (get_status(core) == status_playing)
 	{
 		if (!get_client(core)->is_meleeing && ks == m_left_click)
@@ -73,6 +77,8 @@ static int	hook_render(t_core *core)
 	t_anim	*gm;
 	clock_t	cpu;
 
+	if (get_game(core)->stop_proc)
+		return (0);
 	death_player(core);
 	if (get_status(core) != status_playing)
 		return (1);

@@ -137,7 +137,6 @@ $(NAME): $(MLX) $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX) $(LIBFLAGS) -lm
 	@echo "$(COLOR_BOLD)$(COLOR_MAGENTA)Compilation done.$(COLOR_RESET)"
 	@echo ""
-	@valgrind ./$(NAME) "maps/sp/test.ber"
 
 $(SAVE_DIR):
 	@echo "$(COLOR_CYAN)Creating directory $(SAVE_DIR)$(COLOR_RESET)"

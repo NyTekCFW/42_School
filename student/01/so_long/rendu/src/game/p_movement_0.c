@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:24:03 by lchiva            #+#    #+#             */
-/*   Updated: 2024/02/20 08:14:46 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/02/22 00:00:00 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,11 @@ static void	player_case_effect(t_core *core, char *map, t_vec2 xy)
 				playsound("rupee", 0, 0, 1);
 				*map = g_ground;
 			}
-			if (*map == g_exit && get_game(core)->ents[c_collect] == 0)
+			if (*map == g_exit && get_game(core)->ents[c_collect] == 0
+				&& get_anim(core)->status[a_exit] == 3)
 			{
+				get_game(core)->stop_proc = 1;
+				set_status(core, status_main);
 				playsound("get_master_sword", 1, 1, 0);
 				win_exit(core);
 			}
