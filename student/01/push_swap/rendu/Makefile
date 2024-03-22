@@ -42,13 +42,46 @@ NAME = push_swap
 OBJ_DIR = obj
 SRC_DIR = ./src/
 
+BONUS_NAME = checker
+B_DIR = ./bonus
+OBJ_DIR_BONUS = ./bonus/obj
+
 SRCS := $(shell find $(SRC_DIR) -name '*.c')
 
 vpath %.c $(SRC_DIR) $(shell find $(SRC_DIR) -type d)
-
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(SRCS)))
+all: init_header $(OBJ_DIR) $(NAME)
 
-all: init_header $(OBJ_DIR) $(SAVE_DIR) $(NAME)
+BONUS_FILES = $(B_DIR)/bmain.c \
+		$(B_DIR)/checker/bcheck_0.c \
+		$(B_DIR)/checker/bcheck_1.c \
+		$(B_DIR)/checker/bpiles.c \
+		$(B_DIR)/checker/bswap_0.c \
+		$(B_DIR)/checker/bswap_1.c \
+		$(B_DIR)/checker/bswap_2.c \
+		$(B_DIR)/checker/bswap_3.c \
+		$(B_DIR)/utils/bmemory.c \
+		$(B_DIR)/utils/bstring_0.c \
+		$(B_DIR)/utils/bstring_1.c \
+		$(B_DIR)/utils/bstring_2.c \
+		$(B_DIR)/utils/bstring_3.c \
+		$(B_DIR)/utils/bxsort.c
+
+OBJ_BONUS := $(patsubst $(B_DIR)/%.c, $(OBJ_DIR_BONUS)/%.o, $(BONUS_FILES))
+
+$(OBJ_DIR_BONUS):
+	@echo "$(COLOR_CYAN)Creating directory $(OBJ_DIR_BONUS)$(COLOR_RESET)"
+	@mkdir -p $(OBJ_DIR_BONUS) $(OBJ_DIR_BONUS)/checker $(OBJ_DIR_BONUS)/utils
+	@chmod 777 $(OBJ_DIR_BONUS)
+
+$(OBJ_DIR_BONUS)/%.o: $(B_DIR)/%.c | $(OBJ_DIR_BONUS)
+	@$(CC) $(CFLAGS) -c $< -o $@ || (rm -f $@; exit 1)
+	@printf "$(COLOR_BOLD)$(COLOR_CYAN)Compile %-30s ➜$(COLOR_RESET) $(COLOR_BOLD)$(COLOR_GREEN) %-30s$(COLOR_RESET) $(OK_COLOR)[✓]$(NO_COLOR)\n" $(notdir $<) $(notdir $@)
+
+$(BONUS_NAME): $(OBJ_BONUS)
+	@$(CC) $(CFLAGS) -o $(BONUS_NAME) $(OBJ_BONUS) -lncurses
+	@echo "$(COLOR_BOLD)$(COLOR_MAGENTA)Compilation done.$(COLOR_RESET)"
+	@echo ""
 
 
 $(NAME): $(OBJS)
@@ -60,20 +93,24 @@ $(NAME): $(OBJS)
 $(OBJ_DIR):
 	@echo "$(COLOR_CYAN)Creating directory $(OBJ_DIR)$(COLOR_RESET)"
 	@mkdir -p $(OBJ_DIR)
+	@chmod 755 $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@ || (rm -f $@; exit 1)
 	@printf "$(COLOR_BOLD)$(COLOR_CYAN)Compile %-30s ➜$(COLOR_RESET) $(COLOR_BOLD)$(COLOR_GREEN) %-30s$(COLOR_RESET) $(OK_COLOR)[✓]$(NO_COLOR)\n" $(notdir $<) $(notdir $@)
 
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJS) $(OBJ_BONUS)
 	@echo "$(COLOR_BOLD)$(COLOR_YELLOW)All .o files removed.$(COLOR_RESET)"
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(BONUS_NAME)
 	@echo "$(COLOR_BOLD)$(COLOR_YELLOW)$(NAME) removed.$(COLOR_RESET)"
+	@echo "$(COLOR_BOLD)$(COLOR_YELLOW)$(BONUS_NAME) removed.$(COLOR_RESET)"
 
 re: fclean all
+
+bonus: init_header $(OBJ_DIR_BONUS) $(BONUS_NAME)
 
 init_header: 
 	@clear

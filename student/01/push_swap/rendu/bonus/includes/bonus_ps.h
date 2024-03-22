@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   bonus_ps.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 03:10:46 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/22 17:01:34 by lchiva           ###   ########.fr       */
+/*   Created: 2024/03/22 16:58:08 by lchiva            #+#    #+#             */
+/*   Updated: 2024/03/22 19:13:42 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef BONUS_PS_H
+# define BONUS_PS_H
 
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
 # include <stddef.h>
+
+# define BUFFER_SIZE 42
 
 enum e_act
 {
@@ -33,6 +35,12 @@ enum e_pile
 	pile_b,
 	pile_max
 };
+
+typedef struct cmd_s
+{
+	__uint32_t	hash;
+	void		(*(func))();
+}	t_cmd;
 
 typedef struct vec2_s
 {
@@ -58,6 +66,7 @@ typedef struct p_s
 	char		*joined;
 	char		**splitted;
 	int			*range_sizes;
+	t_cmd		cmd[12];
 }	t_p;
 
 //memory
@@ -81,6 +90,7 @@ __int64_t	xatoi(const char *n);
 int			xsort(__int64_t tab[], __int64_t size);
 int			is_sorted(int x);
 void		xputnbr(__int64_t n);
+char		*gnl(int fd);
 //check
 int			check_parsing(int argc, char **argv);
 //pile
@@ -91,22 +101,6 @@ t_pile		*find_prev_pile(int a, t_pile *ptr);
 t_pile		*get_last_pile(int a);
 void		re_attribute_index(int p);
 void		print_pile(int p);
-t_vec2		a_find_prev(__int64_t val, int c);
-t_vec2		a_find_next(__int64_t val, int c);
-t_vec2		a_find_min(int c);
-t_vec2		a_find_max(int c);
-void		rotate_b_pile(t_p *p, t_vec2 v);
-void		main_assign(t_p *p, t_vec2 rng[], t_vec2 rx);
-int			*assign_range(t_vec2 v[], __int64_t size);
-void		final_push(t_p *p);
-//finder
-int			ra_is_better(t_p *p);
-int			is_in_range(t_vec2 v, int index);
-//sort
-void		sort_five(void);
-void		sort_four(void);
-void		sort_three(void);
-void		main_algo(void);
 //swap
 void		sa(void);
 void		sb(void);
@@ -119,4 +113,7 @@ void		ra(void);
 void		rra(void);
 void		rrb(void);
 void		rrr(void);
+//cmds
+int			find_and_execute(t_p *p, char *cmd);
+void		init_cmds(t_p *p);
 #endif

@@ -67,7 +67,8 @@
     "type_traits": "c",
     "utility": "c",
     "chrono": "c",
-    "variant": "c"
+    "variant": "c",
+    "bonus_ps.h": "c"
   },
   "editor.tabSize": 4,
   "editor.insertSpaces": false,
