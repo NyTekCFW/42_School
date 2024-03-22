@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:52:24 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/22 18:39:56 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/03/22 23:34:42 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv)
 	if (argc <= 1)
 		return (0);
 	piles = get_piles(act_init);
-	if (check_parsing(argc, argv) && !is_sorted(pile_a))
+	if (check_parsing(argc, argv))
 	{
 		sort_type();
 		if (is_sorted(pile_a) && piles->p_size[pile_b] == 0)

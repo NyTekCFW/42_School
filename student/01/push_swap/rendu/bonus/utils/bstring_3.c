@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 17:02:48 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/22 19:29:30 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/03/22 23:31:01 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,8 @@ int	find_and_execute(t_p *p, char *cmd)
 			return (p->cmd[i].func(), 1);
 		i++;
 	}
+	if (hashname != fnv1a_hash("\n")
+		&& hashname != fnv1a_hash(""))
+		return (-1);
 	return (0);
 }

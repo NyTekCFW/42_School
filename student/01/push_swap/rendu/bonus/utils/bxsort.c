@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 01:07:38 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/22 19:07:49 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/03/22 23:30:11 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,28 @@ int	is_sorted(int x)
 
 void	sort_type(void)
 {
+	int		i;
 	char	*line;
 	t_p		*p;
 
 	p = get_piles(act_get);
 	init_cmds(p);
+	i = 0;
 	while (1)
 	{
 		line = gnl(0);
-		if (!find_and_execute(p, line))
+		i = find_and_execute(p, line);
+		if (i == 0 || i == -1)
 		{
 			xfree((void **)&line);
 			break ;
 		}
 		xfree((void **)&line);
+	}
+	if (i == -1)
+	{
+		print("Error");
+		free_push(p);
+		exit(1);
 	}
 }

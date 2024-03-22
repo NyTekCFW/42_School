@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 16:58:08 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/22 19:13:42 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/03/22 22:34:13 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,5 @@ void		rrr(void);
 //cmds
 int			find_and_execute(t_p *p, char *cmd);
 void		init_cmds(t_p *p);
+void		free_push(t_p *piles);
 #endif
