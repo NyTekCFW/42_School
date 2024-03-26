@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 00:09:38 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/26 01:59:31 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/03/26 03:45:43 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Contact::Contact(void)
 	memset(this->_firstname, 0, 32);
 	memset(this->_lastname, 0, 32);
 	memset(this->_nickname, 0, 32);
-	memset(this->_phonenumber, 0, 10);
+	memset(this->_phonenumber, 0, 11);
 	memset(this->_secret, 0, 64);
 }
 
@@ -38,8 +38,33 @@ void Contact::rm_contact(void)
 	memset(this->_firstname, 0, 32);
 	memset(this->_lastname, 0, 32);
 	memset(this->_nickname, 0, 32);
-	memset(this->_phonenumber, 0, 10);
+	memset(this->_phonenumber, 0, 11);
 	memset(this->_secret, 0, 64);
+}
+
+char	*Contact::getfirstname(void)
+{
+	return this->_firstname;
+}
+
+char	*Contact::getlastname(void)
+{
+	return this->_lastname;
+}
+
+char	*Contact::getnickname(void)
+{
+	return this->_nickname;
+}
+
+char	*Contact::getphonenumber(void)
+{
+	return this->_phonenumber;
+}
+
+char	*Contact::getsecret(void)
+{
+	return this->_secret;
 }
 
 void	Contact::_set_firstname(void)
@@ -132,7 +157,7 @@ void	Contact::_set_phonenumber(void)
 		if ((std::cin.fail()) || (std::cin.gcount() == sizeof(this->_phonenumber) - 1))
 		{
 			std::cin.clear();
-			memset(this->_phonenumber, 0, 10);
+			memset(this->_phonenumber, 0, 11);
 			std::cout << "Error: phone number too long. Please try again." << std::endl;
 			continue ;
 		}
@@ -148,7 +173,7 @@ void	Contact::_set_phonenumber(void)
 			if ((this->_phonenumber[i] < '0') || (this->_phonenumber[i] > '9'))
 			{
 				std::cin.clear();
-				memset(this->_phonenumber, 0, 10);
+				memset(this->_phonenumber, 0, 11);
 				std::cout << "Error: a non-digit character was found. Please try again." << std::endl;
 				continue ;
 			}

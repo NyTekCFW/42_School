@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 00:25:36 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/26 01:25:12 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/03/26 03:44:30 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ public:
 	Contact(void);
 	void	add_contact(int i);
 	void	rm_contact(void);
+	char	*getfirstname(void);
+	char	*getlastname(void);
+	char	*getnickname(void);
+	char	*getphonenumber(void);
+	char	*getsecret(void);
 	~Contact(void);
 private:
 	void	_set_firstname(void);
@@ -26,7 +31,7 @@ private:
 	char	_firstname[32];
 	char	_lastname[32];
 	char	_nickname[32];
-	char	_phonenumber[10];
+	char	_phonenumber[11];
 	char	_secret[64];
 	int		_index;
 	

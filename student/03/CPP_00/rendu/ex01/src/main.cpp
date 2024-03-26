@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 00:10:27 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/26 02:03:32 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/03/26 03:59:48 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static __uint32_t	get_cmd(void)
 	char		buffer[10];
 
 	memset(buffer, 0, 10);
-	std::cout << "Enter a command : ";
+	std::cout << "> ";
 	std::cin.getline(buffer, sizeof(buffer));
 	return (fnv1a_hash(buffer));
 }
@@ -51,7 +51,7 @@ int	main(int argc, char **argv)
 			Book.inc_pos();
 		}
 		else if (u == SEARCH)
-			continue ;
+			Book.print_contact();
 		else if (u == EXIT)
 			break ;
 	}
