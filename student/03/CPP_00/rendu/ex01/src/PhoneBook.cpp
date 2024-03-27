@@ -6,26 +6,21 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 00:05:32 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/26 04:41:19 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/03/27 00:56:21 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/_phone.hpp"
 #include "../includes/PhoneBook.hpp"
 
-static void welcome(void)
+PhoneBook::PhoneBook(void)
 {
 	std::cout << "Welcome to my PhonyBook Software 📞" << std::endl;
-	std::cout << "------------COMMAND LIST------------" << std::endl;
+	std::cout << "------------  <USAGE>  ------------" << std::endl;
 	std::cout << "ADD = Add a contact" << std::endl;
 	std::cout << "SEARCH = Search a contact" << std::endl;
 	std::cout << "EXIT = Leave PhonyBook" << std::endl;
-	std::cout << "------------------------------------" << std::endl;
-}
-
-PhoneBook::PhoneBook(void)
-{
-	welcome();
+	std::cout << "-----------------------------------" << std::endl;
 }
 
 void PhoneBook::inc_pos(void)
@@ -41,7 +36,7 @@ int	PhoneBook::get_pos(void)
 	return PhoneBook::_pos;
 }
 
-static void	asset_data(char *dest, char *src)
+static void	asset_data(char *dest, const char *src)
 {
 	size_t	len;
 	len = strlen(src);
@@ -59,27 +54,28 @@ static void	asset_data(char *dest, char *src)
 void	PhoneBook::print_contact(void)
 {
 	int		i;
-	char	index[11];
-	char	name[11];
-	char	last[11];
-	char	nick[11];
-	char	entry[11];
+	std::string	buffer;
+	char		index[11];
+	char		name[11];
+	char		last[11];
+	char		nick[11];
 	i = 0;
 	std::cout << "------------- PHONEBOOK CONTACTS ------------" << std::endl;
 	while (i < 8)
 	{
-		if (this->profile[i].getfirstname()[0] == '\0')
+		if (this->profile[i].get_data(i_firstname).length() == 0
+			|| this->profile[i].get_data(i_firstname).data()[0] == '\0')
 			break ;
 		std::cout << "|";
 		memset(index, 0x20, 11);
 		index[9] = 0x30 + i;
 		index[10] = '\0';
 		std::cout << index << "|";
-		asset_data(name, this->profile[i].getfirstname());
+		asset_data(name, this->profile[i].get_data(i_firstname).data());
 		std::cout << name << "|";
-		asset_data(last, this->profile[i].getlastname());
+		asset_data(last, this->profile[i].get_data(i_lastname).data());
 		std::cout << last << "|";
-		asset_data(nick, this->profile[i].getnickname());
+		asset_data(nick, this->profile[i].get_data(i_nickname).data());
 		std::cout << nick << "|" << std::endl; 
 		i++;
 	}
@@ -89,16 +85,16 @@ void	PhoneBook::print_contact(void)
 		std::cout << "No contact(s) found" << std::endl;
 		return ;
 	}
-	memset(entry, 0, 11);
 	std::cout << "Enter a index : ";
-	std::cin.getline(entry, sizeof(entry));
-	if (strlen(entry) == 1 && entry[0] >= '0' && entry[0] <= '9' && entry[0] < 0x30 + i)
+	std::getline(std::cin, buffer);
+	if (strlen(buffer.data()) == 1 && buffer.data()[0] >= '0' && buffer.data()[0] <= '9' && buffer.data()[0] < 0x30 + i)
 	{
-		std::cout << "First Name     : " << this->profile[entry[0] - 0x30].getfirstname() << std::endl;
-		std::cout << "Last Name      : " << this->profile[entry[0] - 0x30].getlastname() << std::endl;
-		std::cout << "Nickname       : " << this->profile[entry[0] - 0x30].getnickname() << std::endl;
-		std::cout << "Phone Number   : " << this->profile[entry[0] - 0x30].getphonenumber() << std::endl;
-		std::cout << "Darkest Secret : " << this->profile[entry[0] - 0x30].getsecret() << std::endl;
+		i = buffer.data()[0] - 0x30;
+		std::cout << "First Name     : " << this->profile[i].get_data(i_firstname).data() << std::endl;
+		std::cout << "Last Name      : " << this->profile[i].get_data(i_lastname).data() << std::endl;
+		std::cout << "Nickname       : " << this->profile[i].get_data(i_nickname).data() << std::endl;
+		std::cout << "Phone Number   : " << this->profile[i].get_data(i_phone).data() << std::endl;
+		std::cout << "Darkest Secret : " << this->profile[i].get_data(i_secret).data() << std::endl;
 	}
 	else
 	{

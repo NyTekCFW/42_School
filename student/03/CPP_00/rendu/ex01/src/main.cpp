@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 00:10:27 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/26 03:59:48 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/03/27 00:46:30 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static __uint32_t	get_cmd(void)
 	return (fnv1a_hash(buffer));
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	__uint32_t	u;
 	PhoneBook	Book;
@@ -55,6 +55,4 @@ int	main(int argc, char **argv)
 		else if (u == EXIT)
 			break ;
 	}
-	(void)argc;
-	(void)argv;
 }

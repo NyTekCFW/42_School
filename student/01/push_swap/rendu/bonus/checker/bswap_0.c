@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 07:57:26 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/22 19:24:28 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/03/26 20:04:37 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,8 @@ void	ss(void)
 	t_p		*piles;
 
 	piles = get_piles(act_get);
-	if (piles->p_size[pile_a] > 1 && piles->p_size[pile_b] > 1)
-	{
+	if (piles->p_size[pile_a] > 1)
 		swap_data(piles->pile[pile_a], piles->pile[pile_a]->next);
+	if (piles->p_size[pile_b] > 1)
 		swap_data(piles->pile[pile_b], piles->pile[pile_b]->next);
-	}
 }

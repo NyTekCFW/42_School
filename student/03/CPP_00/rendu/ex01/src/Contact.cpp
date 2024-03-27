@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 00:09:38 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/26 03:45:43 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/03/27 02:16:22 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,205 +15,82 @@
 
 Contact::Contact(void)
 {
-	memset(this->_firstname, 0, 32);
-	memset(this->_lastname, 0, 32);
-	memset(this->_nickname, 0, 32);
-	memset(this->_phonenumber, 0, 11);
-	memset(this->_secret, 0, 64);
+	for (int i = 0; i < i_max; i++)
+		this->info[i] = "";
 }
 
 void	Contact::add_contact(int i)
 {
 	this->rm_contact();
-	this->_set_firstname();
-	this->_set_lastname();
-	this->_set_nickname();
-	this->_set_phonenumber();
-	this->_set_secret();
+	this->info[i_firstname] = this->set_data("Enter first name: ");
+	this->info[i_lastname] = this->set_data("Enter last name: ");
+	this->info[i_nickname] = this->set_data("Enter nickname: ");
+	this->info[i_phone] = this->set_data("Enter phone number: ");
+	this->info[i_secret] = this->set_data("Enter darkest secret: ");
 	this->_index = i;
 }
 
 void Contact::rm_contact(void)
 {
-	memset(this->_firstname, 0, 32);
-	memset(this->_lastname, 0, 32);
-	memset(this->_nickname, 0, 32);
-	memset(this->_phonenumber, 0, 11);
-	memset(this->_secret, 0, 64);
+	for (int i = 0; i < i_max; i++)
+		this->info[i] = "";
 }
 
-char	*Contact::getfirstname(void)
+std::string Contact::get_data(int id)
 {
-	return this->_firstname;
+	return this->info[id];
 }
 
-char	*Contact::getlastname(void)
+std::string	Contact::set_data(const char *text)
 {
-	return this->_lastname;
-}
-
-char	*Contact::getnickname(void)
-{
-	return this->_nickname;
-}
-
-char	*Contact::getphonenumber(void)
-{
-	return this->_phonenumber;
-}
-
-char	*Contact::getsecret(void)
-{
-	return this->_secret;
-}
-
-void	Contact::_set_firstname(void)
-{
+	std::string	buffer;
+	int	spec;
 	int	is_waitting;
 
 	is_waitting = 1;
+	buffer = "";
+	spec = 0;
 	while (is_waitting)
 	{
-		std::cout << "Enter a first name (max. 32 characters): ";
-		std::cin.getline(this->_firstname, sizeof(this->_firstname));
-		
-		if (std::cin.fail() || std::cin.gcount() == sizeof(this->_firstname) - 1)
+		std::cout <<  text;
+		std::getline(std::cin, buffer);
+		if (std::cin.fail())
 		{
 			std::cin.clear();
-			memset(this->_firstname, 0, 32);
-			std::cout << "Error: First name too long. Please try again." << std::endl;
+			std::cout << "Error: std::cin fail!" << std::endl;
 		}
-		else if (this->_firstname[0] == '\0')
+		else if (buffer.length() == 0 || buffer.data()[0] == '\0')
 		{
 			std::cin.clear();
 			std::cout << "Error: Empty string. Please try again." << std::endl;
 		}
 		else
-			is_waitting = 0;
-	}
-}
-
-void	Contact::_set_lastname(void)
-{
-	int	is_waitting;
-
-	is_waitting = 1;
-	while (is_waitting)
-	{
-		std::cout << "Enter a last name (max. 32 characters): ";
-		std::cin.getline(this->_lastname, sizeof(this->_lastname));
-		if (std::cin.fail() || std::cin.gcount() == sizeof(this->_lastname) - 1)
 		{
-			std::cin.clear();
-			memset(this->_lastname, 0, 32);
-			std::cout << "Error: Last name too long. Please try again." << std::endl;
-		}
-		else if (this->_lastname[0] == '\0')
-		{
-			std::cin.clear();
-			std::cout << "Error: Empty string. Please try again." << std::endl;
-		}
-		else
-			is_waitting = 0;
-	}
-}
-
-void	Contact::_set_nickname(void)
-{
-	int	is_waitting;
-
-	is_waitting = 1;
-	while (is_waitting)
-	{
-		std::cout << "Enter a nickname (max. 32 characters): ";
-		std::cin.getline(this->_nickname, sizeof(this->_nickname));
-		if (std::cin.fail() || std::cin.gcount() == sizeof(this->_nickname) - 1)
-		{
-			std::cin.clear();
-			memset(this->_nickname, 0, 32);
-			std::cout << "Error: Nickname too long. Please try again." << std::endl;
-		}
-		else if (this->_nickname[0] == '\0')
-		{
-			std::cin.clear();
-			std::cout << "Error: Empty string. Please try again." << std::endl;
-		}
-		else
-			is_waitting = 0;
-	}
-}
-
-void	Contact::_set_phonenumber(void)
-{
-	int	i;
-	int	is_waitting;
-
-	is_waitting = 1;
-	i = 0;
-	while (is_waitting)
-	{
-		std::cout << "Enter a phone number (max. 10 digits): ";
-		std::cin.getline(this->_phonenumber, sizeof(this->_phonenumber));
-		if ((std::cin.fail()) || (std::cin.gcount() == sizeof(this->_phonenumber) - 1))
-		{
-			std::cin.clear();
-			memset(this->_phonenumber, 0, 11);
-			std::cout << "Error: phone number too long. Please try again." << std::endl;
-			continue ;
-		}
-		else if (this->_phonenumber[0] == '\0')
-		{
-			std::cin.clear();
-			std::cout << "Error: Empty string. Please try again." << std::endl;
-			continue ;
-		}
-		i = 0;
-		while (this->_phonenumber[i])
-		{
-			if ((this->_phonenumber[i] < '0') || (this->_phonenumber[i] > '9'))
+			for(int o = 0; buffer.data()[o]; o++)
 			{
-				std::cin.clear();
-				memset(this->_phonenumber, 0, 11);
-				std::cout << "Error: a non-digit character was found. Please try again." << std::endl;
-				continue ;
+				if ((buffer.data()[o] >= '0' && buffer.data()[o] <= '9')
+					|| (buffer.data()[o] >= 'a' && buffer.data()[o] <= 'z')
+					|| (buffer.data()[o] >= 'A' && buffer.data()[o] <= 'Z')
+					|| (buffer.data()[o] >= ' '))
+					continue ;
+				else
+				{
+					spec = 1;
+					buffer.replace(o, sizeof(char), "?");
+				}
 			}
-			i++;
-		}
-		is_waitting = 0;
-	}
-}
-
-void	Contact::_set_secret(void)
-{
-	int	is_waitting;
-
-	is_waitting = 1;
-	while (is_waitting)
-	{
-		std::cout << "Enter his darkest secret (max. 64 characters): ";
-		std::cin.getline(this->_secret, sizeof(this->_secret));
-		if (std::cin.fail() || std::cin.gcount() == sizeof(this->_secret) - 1)
-		{
-			std::cin.clear();
-			memset(this->_secret, 0, 64);
-			std::cout << "Error: Darkest secret too long. Please try again." << std::endl;
-		}
-		else if (this->_secret[0] == '\0')
-		{
-			std::cin.clear();
-			std::cout << "Error: Empty string. Please try again." << std::endl;
-		}
-		else
 			is_waitting = 0;
+		}
 	}
+	if (spec)
+		std::cout << "Special character(s) was found and be replaced by ?" << std::endl;
+	return (buffer);
 }
+
 
 Contact::~Contact(void)
 {
-	memset(this->_firstname, 0, 32);
-	memset(this->_lastname, 0, 32);
-	memset(this->_nickname, 0, 32);
-	memset(this->_phonenumber, 0, 10);
-	memset(this->_secret, 0, 64);
+	for (int i = 0; i < i_max; i++)
+		this->info[i] = "";
 	this->_index = 0;
 }
