@@ -1,4 +1,4 @@
-# sl_cheatcode
+# cheat code
 A proof of concept (PoC) demonstrating the feasibility of incorporating a cheat code functionality into the "So_Long" project of 42 school
 
 ## Build
