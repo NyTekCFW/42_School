@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/06 07:46:27 by lchiva            #+#    #+#             */
+/*   Updated: 2024/09/08 10:03:56 by lchiva           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#pragma once
+
+#include "Animal.hpp"
+#include "Brain.hpp"
+
+class Dog: public Animal
+{
+    public:
+        //canon
+        Dog(void);
+        Dog(const std::string &type);
+        Dog(const Dog& copy);
+        virtual ~Dog(void);// destructeur virtuel pour garantir la destruction appropriée des objets dérivés
+        Dog const &operator=(const Dog& cpy);
+        //member
+        virtual void makeSound() const;// méthode virtuelle pour le polymorphisme
+        const std::string& getBrain(int index) const;
+        void setBrain(int index, const std::string& idea);
+        Brain *getBrainPtr(void);
+    private:
+        Brain *_brain;
+};
+
+std::ostream &operator<<(std::ostream &o, const Dog & c);

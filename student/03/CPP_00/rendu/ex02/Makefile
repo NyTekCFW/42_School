@@ -36,11 +36,11 @@ COLOR_REVERSE_BRIGHT = \033[7;7m
 COLOR_HIDDEN_BRIGHT = \033[8;8m
 
 CC = g++
-CFLAGS = -Wall -Wextra -Wno-unused -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Wno-unused -Werror -pedantic -std=c++98
 RM = rm -rf
-NAME = Phone_Contact
+NAME = Account
 OBJ_DIR = obj
-SRC_DIR = ./src/
+SRC_DIR = ./
 
 SRCS := $(shell find $(SRC_DIR) -name '*.cpp')
 vpath %.cpp $(SRC_DIR) $(shell find $(SRC_DIR) -type d)
@@ -48,7 +48,7 @@ OBJS = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(notdir $(SRCS)))
 all: init_header $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "$(COLOR_BOLD)$(COLOR_MAGENTA)Compilation done.$(COLOR_RESET)"
 	@echo ""
 

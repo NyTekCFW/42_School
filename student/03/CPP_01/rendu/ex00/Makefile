@@ -35,10 +35,10 @@ COLOR_BLINK_BRIGHT = \033[5;5m
 COLOR_REVERSE_BRIGHT = \033[7;7m
 COLOR_HIDDEN_BRIGHT = \033[8;8m
 
-CC = g++
-CFLAGS = -Wall -Wextra -Wno-unused -Werror -std=c++98
+CC = c++
+CFLAGS = -Wall -Wextra -Wno-unused -Werror -pedantic -std=c++98
 RM = rm -rf
-NAME = BraiiiiiiinnnzzzZ
+NAME = zombie
 OBJ_DIR = obj
 SRC_DIR = ./src/
 
@@ -48,7 +48,7 @@ OBJS = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(notdir $(SRCS)))
 all: init_header $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "$(COLOR_BOLD)$(COLOR_MAGENTA)Compilation done.$(COLOR_RESET)"
 	@echo ""
 

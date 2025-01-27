@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:20:07 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/27 06:10:27 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/09/06 07:38:11 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,8 @@
 
 int	main(void)
 {
-	Zombie *zm;
-	randomChump("SVSC_Member(s)");
-	randomChump("NyTekCFW");
-	randomChump("ZenaxFR");
-	randomChump("Zeam");
-	randomChump("Lowell");
-	randomChump("Curly");
-	zm = newZombie("Support Misakii");
+	Zombie* zm = newZombie("Jean-Kevin_du93");
 	zm->announce();
+	randomChump("xxdarkHerve");
 	delete(zm);
 }

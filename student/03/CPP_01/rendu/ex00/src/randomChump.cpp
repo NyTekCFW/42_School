@@ -6,7 +6,7 @@
 /*   By: lchiva <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 05:40:02 by lchiva            #+#    #+#             */
-/*   Updated: 2024/03/27 06:11:35 by lchiva           ###   ########.fr       */
+/*   Updated: 2024/09/06 07:38:16 by lchiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	randomChump(std::string name)
 {
-	Zombie	*zm;
-
-	zm = newZombie(name);
-	zm->announce();
-	delete(zm);
+	Zombie	z = Zombie(name);
+	z.announce();
 }
